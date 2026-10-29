@@ -37,7 +37,7 @@ Download the installer from [Releases](https://github.com/gillesduif/iGloo/relea
 | **Fedora KDE** | Anaconda / kickstart | Validated on physical hardware: [(open issue)](#1) |
 | **Debian 13** | debian-installer + live-installer / preseed | Validated on physical hardware |
 | **Ubuntu** | subiquity / autoinstall (cloud-init) | In development. (Full details in [here](distros/ubuntu/STATUS.md).) |
-| **Bazzite DX** | Anaconda (Fedora netinstall) / kickstart + `ostreecontainer` | Implemented, not yet validated on hardware. ([Details](docs/product/distros.md#bazzite-dx)) |
+| **Bazzite DX** | Anaconda (Fedora netinstall) / kickstart + `ostreecontainer` | **Experimental**: implemented, not yet validated on hardware. ([Details](docs/product/distros.md#bazzite-dx)) |
 
 The application catalog also lists 15 additional distributions as planned entries. These contain metadata and logos only.
 

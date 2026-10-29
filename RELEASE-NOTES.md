@@ -1,4 +1,4 @@
-Second alpha of iGloo: migrate from Windows 11 to Linux without touching a terminal.
+Third alpha of iGloo: migrate from Windows 11 to Linux without touching a terminal.
 
 Validated end-to-end on bare metal, dual-boot alongside Windows 11:
 
@@ -6,24 +6,20 @@ Validated end-to-end on bare metal, dual-boot alongside Windows 11:
 - Linux Mint Cinnamon
 - Debian (GNOME)
 
+New and **experimental** (not yet validated on hardware):
+
+- Bazzite DX
+
 ## Added
 
-- Browser migration carries the whole profile. 0.1-alpha moved saved passwords only. A ticked browser now arrives with its bookmarks, history, favicons, cookies and the tabs that were open on Windows. Firefox and Zen keep their existing profile directory instead of being handed a new one, and the installed Firefox is matched to the profile's major version. The migrated browser is made the default.
-- The Windows account picture is carried over as the Linux avatar.
-- The boot menu is themed and lists one entry per operating system, each with its own logo, and names the Windows entry instead of numbering it. There is no *Advanced options* submenu.
-- The hostname is derived from the Windows computer name where that is a valid hostname, instead of always from the user name.
-- `igloo-boot-order.service` puts this system back at the front of the UEFI boot order on every boot, not only at install time.
+- Bazzite DX, Universal Blue's gaming system with developer tools (VS Code, Docker and Podman, distrobox, libvirt, Homebrew). iGloo installs it unattended from the Fedora netinstall and downloads the system image during the install. NVIDIA machines get the NVIDIA edition, so the first session already runs on the right driver. Updates are checked against Universal Blue's signature. The user logs in to the Plasma desktop with their password, instead of Bazzite DX's default passwordless start into Steam Gaming Mode. Firefox and Bazzite's other default apps are installed at first boot, and files, browsers, Wi-Fi and display settings are migrated as on the other distributions.
+- With Secure Boot on, the pre-flight check explains the one-time key confirmation Bazzite needs at the first reboot.
 
 ## Fixed
 
-- Choosing Windows from the boot menu once made Windows the permanent default. The machine then went straight to Windows on every following boot and looked like Linux had never been installed.
-- A Linux installed earlier stopped booting once another distribution was installed next to it, hanging indefinitely on a device that did not exist. The boot entry for it named a partition by kernel name, which changes with probe order.
-- The migrated display layout reverted to the distribution default after logging out.
-- The application scan missed roughly a quarter of the installed programs.
-- Brave and Chrome discarded the imported passwords and reset their password database.
-- Every install left an orphaned entry behind in the Windows boot store.
+- The test `blkid` stub is created owner-only instead of world-executable.
 
-The full list is in the [changelog](https://github.com/gillesduif/iGloo/blob/main/CHANGELOG.md).
+The full list is in the [changelog](https://github.com/Millenyum/iGloo-bazzite/blob/main/CHANGELOG.md).
 
 ## Known limitations
 
@@ -33,12 +29,13 @@ The full list is in the [changelog](https://github.com/gillesduif/iGloo/blob/mai
 - The boot menu labels the Windows entry "Windows 11" on Windows 10 machines ([#228](https://github.com/gillesduif/iGloo/issues/228))
 - Boot can take around 100 seconds between the menu and the login screen on NVMe ([#221](https://github.com/gillesduif/iGloo/issues/221))
 - Locales without a glibc equivalent, such as en-BE, fall back rather than map ([#220](https://github.com/gillesduif/iGloo/issues/220))
+- Bazzite DX is experimental: it has not been installed on physical hardware yet. It needs a network connection during the install, and NVIDIA cards older than the GTX 16-series are not supported by the image it picks for them.
 - Unsigned installer: SmartScreen will warn (click "More info" > "Run anyway")
 
-SHA256 of `iGloo-Setup-0.2-alpha.exe`:
+SHA256 of `iGloo-Setup-0.3-alpha.exe`:
 
 ```
-2f9b154f561398e468ff74760ca728c3e95ec8cf72b760157132618387e6556e
+<SHA256 printed by installer\build-setup.bat>
 ```
 
 Requires Windows 10 (version 1809) or Windows 11. On systems with an NVIDIA GPU and Secure Boot enabled, the installation completes but the locally compiled NVIDIA module is rejected by the kernel; the pre-flight check warns about this in advance. Linux Mint is the exception: it ships pre-signed NVIDIA modules and works with Secure Boot enabled. Read the [README](https://github.com/gillesduif/iGloo#readme) for the full safety model before running.

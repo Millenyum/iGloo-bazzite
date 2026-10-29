@@ -6,6 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project aims to follow [Semantic Versioning](https://semver.org/) once it
 reaches a stable release.
 
+## [0.3-alpha] - 2026-10-29
+
+### Added
+- **Bazzite DX (experimental).** Bazzite DX, Universal Blue's gaming image
+  with developer tooling (VS Code, Docker/Podman, distrobox, libvirt,
+  Homebrew), can be installed. Not yet validated on hardware.
+  - Bazzite ships no kickstart-capable ISO, so iGloo boots the Fedora
+    Everything netinstall and deploys the image with `ostreecontainer`. The
+    machine needs a network connection during the install.
+  - NVIDIA machines get the `bazzite-dx-nvidia` image (NVIDIA open driver,
+    GTX 16 / RTX 20 and newer). Nothing is installed after boot.
+  - Updates are switched to signature-checked (`bootc switch
+    --enforce-container-sigpolicy`) and the first-boot agent verifies it.
+  - Preflight blocks legacy BIOS and explains the one-time MokManager key
+    enrollment when Secure Boot is on.
+  - The first boot installs Bazzite's default Flatpaks (Firefox first, which
+    a netinstall would otherwise lack), adds the user to `docker`,
+    `incus-admin` and `libvirt`, and in dual-boot adds Windows to the menu.
+  - Bazzite DX's passwordless autologin into Steam Gaming Mode is turned off;
+    the user logs in to Plasma with their password.
+- Product documentation: `docs/product/distros.md`.
+
+### Security
+- Windows-side values (user name, full name, disk model) are escaped before
+  they reach the Bazzite DX kickstart's root `%post` script.
+
+### Changed
+- The Fedora KDE first-boot agent resolves the root disk from a `ROOT_MOUNT`
+  setting (default `/`, behaviour unchanged), so image-based systems can
+  point the seed cleanup at `/sysroot`.
+- CI: `actions/checkout` 7, `actions/setup-dotnet` 6; win-x64 published from
+  the folder profile.
+
+### Fixed
+- The test `blkid` stub is created owner-only, not world-executable.
+
 ## [0.2-alpha] - 2026-08-23
 
 ### Added
@@ -383,6 +419,7 @@ plus data/Wi-Fi/app migration.
 - **Debian 13** and **Linux Mint Cinnamon** - validated end-to-end in a VM.
 - **Ubuntu** - in development.
 
+[0.3-alpha]: https://github.com/Millenyum/iGloo-bazzite/compare/1c4626f...v0.3-alpha
 [0.2-alpha]: https://github.com/gillesduif/iGloo/compare/v0.1-alpha...v0.2-alpha
 [0.1-alpha]: https://github.com/gillesduif/iGloo/compare/v0.0.1-alpha...v0.1-alpha
 [0.0.1-alpha]: https://github.com/gillesduif/iGloo/releases/tag/v0.0.1-alpha

@@ -28,7 +28,7 @@
   #define IglooPublishDir "publish"
 #endif
 #ifndef IglooVersion
-  #define IglooVersion "0.2-alpha"
+  #define IglooVersion "0.3-alpha"
 #endif
 
 [Setup]
@@ -52,7 +52,7 @@ PrivilegesRequired=admin
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 UninstallDisplayIcon={app}\iGloo.exe
-VersionInfoVersion=0.2.0.0
+VersionInfoVersion=0.3.0.0
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

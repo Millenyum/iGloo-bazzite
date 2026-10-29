@@ -8,8 +8,9 @@ real-hardware validation, not aspirations.
 Scope lives on the [milestones](https://github.com/gillesduif/iGloo/milestones)
 so there is one source of truth. This page is the index.
 
-Current release: 0.2-alpha. Fedora KDE, Linux Mint Cinnamon and Debian each
-install unattended alongside Windows 11 on real hardware.
+Current release: 0.3-alpha. Fedora KDE, Linux Mint Cinnamon and Debian each
+install unattended alongside Windows 11 on real hardware. Bazzite DX is new and
+experimental: implemented, not yet validated on hardware.
 
 ## Now
 
